@@ -1,0 +1,135 @@
+<h1>Shift Data</h1>
+{% from "_formhelpers.html.j2" import render_field %}
+<form method="post">
+    <dl>
+        {{ render_field(form.startTime, class="datetimepicker") }}
+        {{ render_field(form.endTime, class="datetimepicker") }}
+    </dl>
+    <p><input type="submit" value="Fetch Data" class="btn btn-success" />
+</form>
+
+{% if data and data.maxFreq %}
+<table>
+    <tr>
+        <td>Max Freq</td>
+        <td>Max Freq Time</td>
+        <td>Min Freq</td>
+        <td>Min Freq Time</td>
+        <td>Avg Freq</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{{data.maxFreq}}</td>
+        <td>{{data.maxFreqTime}}</td>
+        <td>{{data.minFreq}}</td>
+        <td>{{data.minFreqTime}}</td>
+        <td>{{data.avgFreq}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Max Demand</td>
+        <td>Max Demand Time</td>
+        <td>Min Demand</td>
+        <td>Min Demand Time</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>{{data.maxDem}}</td>
+        <td>{{data.maxDemTime}}</td>
+        <td>{{data.minDem}}</td>
+        <td>{{data.minDemTime}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Export Values</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Min WR-ER</td>
+        <td>Max WR-ER</td>
+        <td>Min WR-SR</td>
+        <td>Max WR-SR</td>
+        <td>Min WR-NR</td>
+        <td>Max WR-NR</td>
+        <td>Min IR</td>
+        <td>Max IR</td>
+    </tr>
+    <tr>
+        <td>{{data.wrErExportMin}}</td>
+        <td>{{data.wrErExportMax}}</td>
+        <td>{{data.wrSrExportMin}}</td>
+        <td>{{data.wrSrExportMax}}</td>
+        <td>{{data.wrNrExportMin}}</td>
+        <td>{{data.wrNrExportMax}}</td>
+        <td>{{data.wrIrExportMin}}</td>
+        <td>{{data.wrIrExportMax}}</td>
+    </tr>
+    <tr>
+        <td>Import Values</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Min WR-ER</td>
+        <td>Max WR-ER</td>
+        <td>Min WR-SR</td>
+        <td>Max WR-SR</td>
+        <td>Min WR-NR</td>
+        <td>Max WR-NR</td>
+        <td>Min IR</td>
+        <td>Max IR</td>
+    </tr>
+    <tr>
+        <td>{{data.wrErImportMin}}</td>
+        <td>{{data.wrErImportMax}}</td>
+        <td>{{data.wrSrImportMin}}</td>
+        <td>{{data.wrSrImportMax}}</td>
+        <td>{{data.wrNrImportMin}}</td>
+        <td>{{data.wrNrImportMax}}</td>
+        <td>{{data.wrIrImportMin}}</td>
+        <td>{{data.wrIrImportMax}}</td>
+    </tr>
+</table>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+{% endif %}
+
+<script type="application/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<link href="{{ url_for('static', filename='flatpickr.min.css') }}" type="text/css" rel="stylesheet" />
+<script src="{{ url_for('static', filename='flatpickr.min.js') }}"></script>
+<script type="application/javascript">
+    jQuery(document).ready(function ($) {
+        $(".datetimepicker").flatpickr({
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+    });
+</script>
