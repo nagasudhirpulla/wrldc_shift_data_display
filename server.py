@@ -3,8 +3,8 @@ from wtforms import Form, validators, DateTimeField
 from src.app.shiftDataFetcher import getShiftData
 from src.config.appConfig import loadAppConfig
 
-# create a flask server
 app = Flask(__name__)
+# initialize config from JSON
 appConf = loadAppConfig()
 
 class ShiftDataForm(Form):
@@ -21,7 +21,5 @@ def index():
         data = getShiftData(form.startTime.data, form.endTime.data)
     return render_template("index.html", form=form, data=data)
 
-# __name__ will be __main__ only if this file is the entry point
 if __name__ == '__main__':
-    # run the server on this ip and port 50100
-    app.run(host='0.0.0.0', port=8086, debug=True)
+    app.run(host=appConf.host, port=appConf.port, debug=True)

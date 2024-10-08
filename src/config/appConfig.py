@@ -4,6 +4,8 @@ import json
 
 @dataclass
 class AppConfig:
+    host: str = field(default="localhost")
+    port: int = field(default=8080)
     histDataUrlBase: str = field(default="")
     isRandom: bool = field(default=False)
     freqPnt: str = field(default="")
